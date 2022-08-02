@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deploying static Nextjs apps into Azure
+This post will guide you through the steps to setup a static export of your Nextjs app. But before we get started let’s list some of the reasons why you might want to use Next for a static webapp instead of plain react:
 
-## Getting Started
+-	SEO out of the box, no configuration or extra code required
+-	Image optimization, Nextjs will serve lighter versions of your images to smaller screen sizes
+-	Easier to setup and maintain project. Next will configure common dependencies most projects need: webpack, es-lint, css-modules, typescript, sass etc. 
+-	Gives your project a standardized structure. This one often gets un-noticed but is very convenient for onboarding new developers.
 
-First, run the development server:
+## Setup of the project
+If you already have a Nextjs project you can skip this step.
 
-```bash
-npm run dev
-# or
-yarn dev
+```sh
+npx create-next-app --ts 
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```sh
+npm install sass
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Go to package.json and change the build script to:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```json
+"build": "next build && next export",
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Done. Very easy, bearly an inconvenience.
