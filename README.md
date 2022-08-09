@@ -6,6 +6,13 @@ This post will guide you through the steps to setup a static export of your Next
 -	Easier to setup and maintain project. Next will configure common dependencies most projects need: webpack, es-lint, css-modules, typescript, sass etc. 
 -	Gives your project a standardized structure. This one often gets un-noticed but is very convenient for onboarding new developers.
 
+This deployment strategy will work with any provider. At vent.io we picked Azure, and here are some reasons why you might want to do it aswell:
+
+- Provides global hosting. Serving your apps closer to the clients, making response times faster.
+- Offers a free tier for static web apps. It can be useful before the app goes into production.
+- Easy to configure CI/CD pipeline, fully integrated with GitHub.
+- In case a static webapp is no longer enough to fulfill business needs, Azure offers a lot of other tools and options to scale your projects like Azure Container Apps, Azure App Service, or Azure Kubernetes Service.
+- Many tech companies already use MS Teams, Azure Active Directory allows you to manage all credentials in a single platform.
 ## Setup of the project
 If you already have a Nextjs project you can skip this step.
 
@@ -22,7 +29,6 @@ Go to package.json and change the build script to:
 ```json
 "build": "next build && next export",
 ```
-Done. Very easy, bearly an inconvenience.
 <br>
 # Image Optimization
 If you go to the [Nextjs Documentation](https://nextjs.org/docs/advanced-features/static-html-export) you will see that the Image Optimization does not work with the static exports. 
@@ -160,7 +166,7 @@ We should not commit these files as they are generated so let's add them to our 
 /public/optimized
 ```
 
-And we are done with this section. 
+With this we finalized the project setup.
 
 To develop you can use the dev command to get all those juicy developer quality of life features like error mapping, hot reloading, etc.
 
@@ -188,3 +194,21 @@ http-server out
 
 With the default config, your page should be served at: http://127.0.0.1:8080
 
+# Configure Azure Deployment 
+Go to Azure portal and create a new "Static Web Apps" service.
+
+Configure the deployment zone and Azure plan as you wish.
+
+After login into github and authorizing Azure you should be able to select your repos.
+Important: the App location should be "/" and the output location should be "out"
+
+![alt azure-config](/public/images/png/azure-config.png)
+
+Then go to review and create and we are done!
+
+Note: The environment takes a couple of minutes to become live so don't worry if it does not work instantly.
+
+## Extra notes
+You should see that Azure comitted a new file on .github folder. This will create new deployments whenever you open a PR to main and will automatically delete them when you merge. 
+
+It will also update your main environment once there is a push onto main. (Note that merging a PR is also considered a push)
