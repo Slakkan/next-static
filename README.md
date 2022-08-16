@@ -6,13 +6,20 @@ This post will guide you through the steps to setup a static export of your Next
 -	Easier to setup and maintain project. Next will configure common dependencies most projects need: webpack, es-lint, css-modules, typescript, sass etc. 
 -	Gives your project a standardized structure. This one often gets un-noticed but is very convenient for onboarding new developers.
 
-This deployment strategy will work with any provider. At vent.io we picked Azure, and here are some reasons why you might want to do it aswell:
+This deployment strategy will work with any provider. At vent.io we picked Azure, and here are some reasons why you might want to do it as well:
 
 - Provides global hosting. Serving your apps closer to the clients, making response times faster.
 - Offers a free tier for static web apps. It can be useful before the app goes into production.
 - Easy to configure CI/CD pipeline, fully integrated with GitHub.
 - In case a static webapp is no longer enough to fulfill business needs, Azure offers a lot of other tools and options to scale your projects like Azure Container Apps, Azure App Service, or Azure Kubernetes Service.
 - Many tech companies already use MS Teams, Azure Active Directory allows you to manage all credentials in a single platform.
+
+## Before getting started
+In case you are having problems following the tutorial, here there is a link to the repository where I committed step by step each of the sections of this tutorial:
+https://github.com/Slakkan/next-static
+
+And here is the deployed version in Azure to show that it works:
+https://agreeable-tree-0cd8c3503.1.azurestaticapps.net/
 ## Setup of the project
 If you already have a Nextjs project you can skip this step.
 
@@ -29,7 +36,6 @@ Go to package.json and change the build script to:
 ```json
 "build": "next build && next export",
 ```
-<br>
 # Image Optimization
 If you go to the [Nextjs Documentation](https://nextjs.org/docs/advanced-features/static-html-export) you will see that the Image Optimization does not work with the static exports. 
 
@@ -202,13 +208,13 @@ Configure the deployment zone and Azure plan as you wish.
 After login into github and authorizing Azure you should be able to select your repos.
 Important: the App location should be "/" and the output location should be "out"
 
-![alt azure-config](/public/images/png/azure-config.png)
+![alt azure-config](https://github.com/Slakkan/next-static/blob/main/public/images/png/azure-config.png?raw=true)
 
 Then go to review and create and we are done!
 
 Note: The environment takes a couple of minutes to become live so don't worry if it does not work instantly.
 
 ## Extra notes
-You should see that Azure comitted a new file on .github folder. This will create new deployments whenever you open a PR to main and will automatically delete them when you merge. 
+You should see that Azure committed a new file on .github folder. This will create new deployments whenever you open a PR to main and will automatically delete them when you merge. 
 
 It will also update your main environment once there is a push onto main. (Note that merging a PR is also considered a push)
