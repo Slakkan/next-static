@@ -1,4 +1,6 @@
 # Deploying static Nextjs apps into Azure
+![alt azure-config](https://raw.githubusercontent.com/Slakkan/next-static/1cefb433f2109b6b887c516c84b1396c9c678c16/public/hero.svg)
+
 This post will guide you through the steps to setup a static export of your Nextjs app. But before we get started let’s list some of the reasons why you might want to use Next for a static webapp instead of plain react:
 
 -	SEO out of the box, no configuration or extra code required
